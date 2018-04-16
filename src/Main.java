@@ -44,7 +44,28 @@ public class Main {
      * @param arrayList the ArrayList to be sorted. arrayList cannot contain duplicates
      */
     public static void mergeSort(ArrayList<Integer> arrayList) {
-        throw new UnsupportedOperationException("mergeSort() has not been implemented yet");
+        int min = arrayList[0];
+        int max = arrayList[0];
+        int minIndex = 0;
+        int maxIndex = 0;
+        for (int i = 0; i < arrayList.size(); i++)
+        {
+            if(arrayList[i] < min)
+            {
+                min = arrayList[i];
+                minIndex = i;
+            }
+        }
+        for (int i = 0; i < arrayList.size(); i++)
+        {
+            if (arrayList[i] > max)
+            {
+                max = arrayList[i];
+                maxIndex = i;
+            }
+        }
+        int middleIndex = (minIndex + maxIndex)/2;
+
     }
 
     /**
@@ -57,7 +78,7 @@ public class Main {
      * @param hi the index of the last element in the range + 1.
      */
     public static void sort(ArrayList<Integer> arrayList, int lo, int hi) {
-        throw new UnsupportedOperationException("sort() has not been implemented yet");
+
     }
 
     /**
@@ -71,6 +92,43 @@ public class Main {
      * @param hi the index of the last element in the second range + 1.
      */
     public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
-        throw new UnsupportedOperationException("merge() has not been implemented yet");
+        int sizeleft = mid - lo +1;
+        int sizeright = hi - mid;
+
+        int left[] = new int[sizeleft];
+        int right[] = new int[sizeright];
+
+        for (int i = 0; i < sizeleft; i++)
+        {
+            left[i] = arrayList[lo + 1];
+        }
+        for (int i = 0; i < sizeright; i++)
+        {
+            right[i] = arrayList[i + 1 + mid];
+        }
+        int firstIndLeft = 0;
+        int firstIndRight = 0;
+        int firstIndMerged = lo;
+
+        while (firstIndLeft < sizeleft && firstIndRight < sizeright)
+        {
+            if (left[firstIndLeft] <= right[firstIndRight])
+            {
+                arrayList[firstIndMerged]  = left[firstIndLeft];
+                firstIndLeft++;
+            }
+            else
+            {
+               arrayList[firstIndMerged] = right[firstIndRight];
+               firstIndRight++;
+            }
+            firstIndMerged++;
+        }
+        while (firstIndLeft < sizeleft)
+        {
+            arrayList[firstIndMerged] = left[firstIndLeft];
+            firstIndRight++;
+            firstIndMerged++;
+        }
     }
 }
