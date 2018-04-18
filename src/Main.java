@@ -78,7 +78,13 @@ public class Main {
      * @param hi the index of the last element in the range + 1.
      */
     public static void sort(ArrayList<Integer> arrayList, int lo, int hi) {
-
+        if (hi - lo <= 1) {
+            return;
+        }
+        int mid = (hi + lo) /2;
+        sort(arrayList, lo, mid);
+        sort(arrayList, mid, hi);
+        merge(arrayList, lo, mid, hi);
     }
 
     /**
@@ -92,6 +98,28 @@ public class Main {
      * @param hi the index of the last element in the second range + 1.
      */
     public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
+        //what we did in class
+        //ArrayList<Integer> tempArray = new ArrayList<Integer>();
+        // int i = lo;
+        //int j = mid;
+        //while (i < mid || j < hi)
+        //if (j == hi){
+        //tempArray.add(arrayList.get(i);
+        //}
+        //else if (i == mid){
+        //tempArray.add(arrayList.get(i);
+        //i++;
+        //}
+        //{
+        // else if (arrayList.get(j) < arrayList.get(i))
+        //{
+        //tempArray.add(arrayList.get(j));
+        //j++;
+        //else{
+        //tempArray.add(arrayList.get(i));
+        //}
+        //}
+        //}
         int sizeleft = mid - lo +1;
         int sizeright = hi - mid;
 
@@ -110,7 +138,7 @@ public class Main {
         int firstIndRight = 0;
         int firstIndMerged = lo;
 
-        while (firstIndLeft < sizeleft && firstIndRight < sizeright)
+        while (firstIndLeft < sizeleft || firstIndRight < sizeright)
         {
             if (left[firstIndLeft] <= right[firstIndRight])
             {
@@ -129,6 +157,11 @@ public class Main {
             arrayList[firstIndMerged] = left[firstIndLeft];
             firstIndRight++;
             firstIndMerged++;
+        }
+        while (firstIndRight < sizeright)
+        {
+            arrayList[firstIndLeft] = right[firstIndRight];
+            firstIndRight++;
         }
     }
 }
